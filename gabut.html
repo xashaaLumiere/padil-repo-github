@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>untuk semua perempuan</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffe6f0, #ffd1dc, #ffb6c1);
+      color: #333;
+      min-height: 100vh;
+      animation: backgroundShift 8s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { background: linear-gradient(135deg, #ffe6f0, #ffd1dc, #ffb6c1); }
+      50% { background: linear-gradient(135deg, #ffb6c1, #ffe6f0, #ffd1dc); }
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #d63384;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: titleGlow 3s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+      50% { text-shadow: 0 0 20px rgba(214, 51, 132, 0.6); }
+    }
+
+    h2 {
+      color: #6f42c1;
+      font-style: italic;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    input {
+      padding: 15px;
+      font-size: 18px;
+      margin: 15px;
+      border-radius: 25px;
+      border: 2px solid #d63384;
+      background: rgba(255,255,255,0.9);
+      transition: all 0.3s ease;
+      width: 250px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #6f42c1;
+      box-shadow: 0 0 15px rgba(111, 66, 193, 0.4);
+      transform: scale(1.05);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      margin-top: 15px;
+      border-radius: 25px;
+      border: none;
+      background: linear-gradient(45deg, #d63384, #6f42c1);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(214, 51, 132, 0.4);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    #ucapan {
+      margin-top: 30px;
+      background: rgba(255, 240, 245, 0.95);
+      padding: 25px;
+      border-radius: 20px;
+      display: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: slideInScale 0.8s ease-out;
+      border: 2px solid rgba(214, 51, 132, 0.2);
+    }
+
+    @keyframes slideInScale {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #ucapan p {
+      font-size: 16px;
+      line-height: 1.8;
+      margin: 15px 0;
+      animation: fadeInText 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    #ucapan p:nth-child(1) { animation-delay: 0.2s; }
+    #ucapan p:nth-child(2) { animation-delay: 0.4s; }
+    #ucapan p:nth-child(3) { animation-delay: 0.6s; }
+    #ucapan p:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .highlight {
+      color: #d63384;
+      font-weight: bold;
+      animation: textPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes textPulse {
+      0%, 100% { color: #d63384; }
+      50% { color: #6f42c1; }
+    }
+
+    .signature {
+      font-style: italic;
+      color: #6c757d;
+      margin-top: 20px;
+      border-top: 2px solid rgba(214, 51, 132, 0.2);
+      padding-top: 15px;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(214, 51, 132, 0.3);
+      font-size: 20px;
+      animation: floatHeart 6s linear infinite;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Particle animation */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(214, 51, 132, 0.8), rgba(111, 66, 193, 0.4));
+      border-radius: 50%;
+      animation: particleFloat 8s linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) translateX(50px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Glowing text animation */
+    .glow-text {
+      animation: glowPulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      from {
+        text-shadow: 0 0 5px rgba(214, 51, 132, 0.5), 0 0 10px rgba(214, 51, 132, 0.5), 0 0 15px rgba(214, 51, 132, 0.5);
+      }
+      to {
+        text-shadow: 0 0 10px rgba(214, 51, 132, 0.8), 0 0 20px rgba(214, 51, 132, 0.8), 0 0 30px rgba(214, 51, 132, 0.8);
+      }
+    }
+
+    /* Bouncing button animation */
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    button:hover {
+      animation: bounce 1s ease infinite;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(214, 51, 132, 0.4);
+    }
+
+    /* Typing animation */
+    .typing-text {
+      overflow: hidden;
+      border-right: 3px solid rgba(214, 51, 132, 0.75);
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: rgba(214, 51, 132, 0.75) }
+    }
+
+    /* Wave animation for input */
+    .wave-input {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wave-input::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(214, 51, 132, 0.2), transparent);
+      animation: wave 2s infinite;
+    }
+
+    @keyframes wave {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Floating animation for message box */
+    #ucapan {
+      animation: slideInScale 0.8s ease-out, float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Rainbow text animation */
+    .rainbow-text {
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+      background-size: 400%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 3s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* Sparkle animation */
+    .sparkle {
+      position: absolute;
+      color: #ffd700;
+      animation: sparkleFloat 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sparkleFloat {
+      0%, 100% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(-20px) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Pulsing border animation */
+    .pulse-border {
+      position: relative;
+    }
+
+    .pulse-border::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #d63384, #6f42c1, #d63384);
+      z-index: -1;
+      animation: pulse-border 2s linear infinite;
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts" id="hearts"></div>
+  <div class="particles" id="particles"></div>
+  
+  <div class="container">
+    <h1 class="glow-text">✨ untuk semua perempuan ✨</h1>
+    <h2 class="typing-text">Masukkan Nama Kamu</h2>
+    <input type="text" id="namaInput" class="wave-input pulse-border" placeholder="Contoh: Alya" />
+    <br/>
+    <button onclick="sebutNama()" class="pulse-border">💖 Tampilkan Ucapan 💖</button>
+
+    <div id="ucapan">
+      <p>
+        <strong>Happy Girlfriend Day ${nama}! 🌸</strong><br><br>
+        pacar ku yang cantik dan luar biasa, kamu sudah semakin dewasa dan berkembang dengan sangat baik! 
+        Setiap hari yang berlalu, kamu tumbuh menjadi pribadi yang semakin kuat, bijaksana, dan menginspirasi. 
+        Dunia ini memang penuh dengan berbagai tantangan yang tidak mudah, dan semakin dewasa kamu, 
+        semakin kompleks dan rumit juga masalah-masalah yang harus dihadapi dalam kehidupan.
+      </p>
+      <p>
+        Apalagi nanti ketika ${nama} sudah mulai memasuki dunia kerja dan berkarir, 
+        pasti akan ada begitu banyak hal yang membuat lelah, stress, dan kadang merasa kewalahan. 
+        Tekanan dari atasan, deadline yang menumpuk, persaingan yang ketat, dan berbagai tuntutan hidup 
+        yang semakin berat. Tapi ingat ya sayang, <span class="highlight">${nama} itu pribadi yang sangat hebat dan istimewa</span> 
+        yang mampu melewati semua rintangan dan badai kehidupan dengan tegar!
+      </p>
+      <p>
+        ${nama} adalah sosok perempuan yang akan menjadi ibu yang luar biasa di masa depan. 💪✨<br>
+        Kamu memiliki hati yang lembut namun jiwa yang kuat. Kamu harus selalu percaya dan yakin 
+        pada kekuatan luar biasa yang ada dalam diri sendiri. Ingat, tidak perlu terburu-buru 
+        untuk menjadi sempurna atau kuat dari sekarang juga. Seiring berjalannya waktu, 
+        dengan setiap pengalaman yang kamu lalui, setiap jatuh bangun yang kamu alami, 
+        ${nama} pasti akan semakin tangguh, bijaksana, dan mampu menghadapi apapun 
+        tantangan yang datang dalam hidup ini.
+      </p>
+      <p>
+        Jangan pernah lupa bahwa setiap perempuan itu unik dan memiliki kekuatan tersendiri. 
+        Kamu tidak sendiri dalam perjuangan ini. Ada banyak perempuan lain di luar sana 
+        yang juga berjuang menghadapi tantangan hidup mereka masing-masing. 
+        Saling mendukung dan menguatkan adalah hal yang indah. 
+        ${nama} juga bisa menjadi inspirasi dan kekuatan bagi perempuan lain di sekitarmu.
+      </p>
+      <p>
+        Ketika hari-hari terasa berat dan sulit, ingatlah bahwa ini semua adalah proses 
+        untuk menjadikan ${nama} pribadi yang lebih kuat dan dewasa. 
+        Setiap air mata yang pernah jatuh, setiap kesedihan yang pernah dirasakan, 
+        setiap kegagalan yang pernah dialami, semua itu akan menjadi pelajaran berharga 
+        yang membentuk karakter ${nama} menjadi semakin baik dan tegar i love you.
+      </p>
+      <p class="highlight">
+        <strong class="rainbow-text">🌺 SEMANGAT UNTUK PACAR KU YANG PALING #0018ff#ff0a00CANTIK DI DUNIA INI! 🌺</strong><br>
+        kamu prempuan luar biasa, berharga, dan memiliki potensi tak terbatas! 
+        Terus berjuang, terus bermimpi, dan jangan pernah menyerah! 
+        Dunia ini butuh kekuatan dan kelembutan kamu 💕✨
+      </p>
+#0003ff<p class="signature">
+        Maaf kalau ada kesalahan kata dan typo dalam pesan ini.<br>
+        Semoga kata-kata sederhana ini bisa memberikan sedikit semangat dan kekuatan.<br>
+        <strong>Salam hangat penuh cinta dari  khairil🤗💝</strong>
+      </p>
+    </div>
+    
+    <!-- Audio player -->
+    <audio id="lagu" preload="auto" loop>
+      <source src="https://files.catbox.moe/clgfxk.mp3" type="audio/mpeg">
+      Browser kamu tidak mendukung pemutar audio.
+    </audio>
+  </div>
+
+  <script>
+    // Create floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+      document.getElementById('hearts').appendChild(heart);
+      
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    // Create hearts periodically
+    setInterval(createHeart, 800);
+
+    // Create particle system
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      const size = Math.random() * 6 + 2;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (Math.random() * 6 + 4) + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      document.getElementById('particles').appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, 10000);
+    }
+
+    // Create particles periodically
+    setInterval(createParticle, 300);
+
+    // Create sparkle effect
+    function createSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.innerHTML = '✨';
+      sparkle.style.left = x + 'px';
+      sparkle.style.top = y + 'px';
+      sparkle.style.fontSize = (Math.random() * 8 + 12) + 'px';
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        sparkle.remove();
+      }, 2000);
+    }
+
+    // Add sparkle on click
+    document.addEventListener('click', function(e) {
+      createSparkle(e.clientX, e.clientY);
+    });
+
+    function sebutNama() {
+      const nama = document.getElementById("namaInput").value.trim();
+      if (!nama) return alert("Masukkan namanya dulu ya! 😊");
+
+      // Tampilkan ucapan
+      const ucapanDiv = document.getElementById("ucapan");
+      ucapanDiv.style.display = "block";
+
+      // Ganti ${nama} dan 'kamu'
+      ucapanDiv.querySelectorAll("p").forEach((el) => {
+        el.innerHTML = el.innerHTML
+          .replace(/\$\{nama\}/g, nama)
+          .replace(/\bkamu\b/gi, nama);
+      });
+
+      // Auto play lagu
+      const audio = document.getElementById("lagu");
+      setTimeout(() => {
+        audio.play().catch((err) => {
+          console.log("Autoplay gagal (biasanya butuh interaksi user):", err);
+        });
+      }, 500);
+
+      // Scroll to message smoothly
+      setTimeout(() => {
+        ucapanDiv.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+
+      // Create celebration effect
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          createSparkle(
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerHeight
+          );
+        }, i * 100);
+      }
+    }
+
+    // Add some sparkle effect to input
+    document.getElementById('namaInput').addEventListener('input', function() {
+      if (this.value.length > 0) {
+        this.style.background = 'linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,240,245,0.9))';
+      } else {
+        this.style.background = 'rgba(255,255,255,0.9)';
+      }
+    });
+
+    // Add hover sparkle effect to button
+    document.querySelector('button').addEventListener('mouseenter', function() {
+      const rect = this.getBoundingClientRect();
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          createSparkle(
+            rect.left + Math.random() * rect.width,
+            rect.top + Math.random() * rect.height
+          );
+        }, i * 200);
+      }
+    });
+
+    // Add typing animation trigger
+    setTimeout(() => {
+      document.querySelector('.typing-text').classList.add('typing-text');
+    }, 1000);
+  </script>
+</body>
+</html>
